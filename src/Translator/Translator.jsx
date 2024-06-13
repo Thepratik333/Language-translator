@@ -256,7 +256,7 @@ const Translator = ({ from, setFrom, to, setTo, text, setText, translate }) => {
                 />
                 <FaCopy
                   className="text-xl cursor-pointer"
-                  onClick={() => handleCopy(translate.translatedTexttranslate?.data?.translations[0]?.translatedText || "")}
+                  onClick={() => handleCopy(translate?.data?.translations[0]?.translatedText)}
                 />
               </div>
             </div>
