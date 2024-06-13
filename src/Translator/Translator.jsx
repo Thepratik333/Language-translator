@@ -6,6 +6,7 @@ import lang from '../assets/lang.png'
 
 const Translator = ({ from, setFrom, to, setTo, text, setText, translate }) => {
   const [convert, setConvert] = useState("");
+  const [translatedText, setTranslatedText] = useState("")
   console.log(translate?.data?.translations[0]?.translatedText);
 
   const handleChangeFrom = (e) => {
@@ -22,6 +23,7 @@ const Translator = ({ from, setFrom, to, setTo, text, setText, translate }) => {
 
   const handleBtn = (e) => {
     e.preventDefault();
+    setTranslatedText()
     setText(convert);
   };
 
@@ -39,8 +41,9 @@ const Translator = ({ from, setFrom, to, setTo, text, setText, translate }) => {
       }
 
     } else {
-      const translatedText = translate?.data?.translations[0]?.translatedText || "";
+      const translatedText = translate?.data?.translations[0]?.translatedText;
       utterThis = new SpeechSynthesisUtterance(translatedText);
+      console.log(utterThis);
       if (translatedText !== "") {
         synth.speak(utterThis);
         toast.success(`Speaking ${translatedText}`, {
@@ -63,6 +66,7 @@ const Translator = ({ from, setFrom, to, setTo, text, setText, translate }) => {
   const SwapHandle = () => {
     setFrom(to);
     setTo(from);
+    setConvert(translate?.data?.translations[0]?.translatedText)
   };
 
   const languages = {
@@ -180,7 +184,7 @@ const Translator = ({ from, setFrom, to, setTo, text, setText, translate }) => {
       </div>
 
       <div className="flex justify-center h-full items-center mt-20">
-        <img src={lang} alt="" style={{ width: "50%" }} />
+        <img src={lang} className='md:block hidden' alt="" style={{ width: "50%" }} />
         <form className="bg-white shadow-lg rounded-lg p-8" onSubmit={handleBtn}>
           <div className="grid gap-6">
             <div className="grid gap-2">
